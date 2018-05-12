@@ -1,10 +1,11 @@
 import { Request } from 'express';
 import { IMiddleware, OverrideMiddleware, AuthenticatedMiddleware,
-    EndpointInfo, EndpointMetadata, Req
+    EndpointInfo, EndpointMetadata, Req, BodyParams
 } from 'ts-express-decorators';
 import { AuthService } from '../services/auth/auth.service';
 import { API_ERRORS } from '../types/app.errors';
 import { ApiError } from '../utils/error';
+import { BodyParameter } from 'swagger-schema-official';
 
 @OverrideMiddleware(AuthenticatedMiddleware)
 export class AuthMiddleware implements IMiddleware  {

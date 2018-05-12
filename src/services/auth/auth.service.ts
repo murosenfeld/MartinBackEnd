@@ -3,7 +3,7 @@ import * as moment from 'moment';
 
 import { Inject, Service } from 'ts-express-decorators';
 import { UserRepositoryToken } from '../../dal/token-constants';
-import { AuthProviderEnum, UserInstance, UserRepository } from '../../dal/User';
+import { UserInstance, UserRepository } from '../../dal/User';
 import { API_ERRORS } from '../../types/app.errors';
 import { MongoErrorCode } from '../../types/mongo';
 import { ApiError } from '../../utils/error';
@@ -98,15 +98,15 @@ export class AuthService {
      * @param { IAuthProviderProfileDto } profile
      * @returns { Promise<AuthDto> }
      */
-    async generateProviderToken(provider: AuthProviderEnum, providerId: string, profile: IAuthProviderProfileDto): Promise<AuthDto> {
-        const existingUser = await this.userRepository.findOne({
-            [provider]: providerId
-        });
-        if (existingUser) return await this.generateToken(existingUser);
+    // async generateProviderToken(provider: AuthProviderEnum, providerId: string, profile: IAuthProviderProfileDto): Promise<AuthDto> {
+    //     const existingUser = await this.userRepository.findOne({
+    //         [provider]: providerId
+    //     });
+    //     if (existingUser) return await this.generateToken(existingUser);
 
-        const savedUser = await this.createUser(profile);
-        return await this.generateToken(savedUser);
-    }
+    //     const savedUser = await this.createUser(profile);
+    //     return await this.generateToken(savedUser);
+    // }
 
     private validateProfile(profile: IAuthProviderProfileDto) {
         if (!profile.email) throw new ApiError('Missing email field', 400);
